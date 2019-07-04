@@ -30,3 +30,8 @@ Linha 2 - Quantidade de imagens que foram classificadas incorretamente por digit
 ## relatorio.pdf
 No arquivo **relatorio.pdf** está contido o relatório do presente projeto, onde se explica a decisão de hiperparâmetros e como todo o projeto foi elaborado.
 
+## apresentacao.pdf
+No arquivo **apresentacao.pdf** está contido a apresentação em slides do trabalho feito.
+
+-----
+Feito por **Matheus Farias**.
