@@ -1,0 +1,7 @@
+O tempo de treinamento total foi 454.92 segundos
+
+A porcentagem de acertos em relação ao conjunto de teste foi 89.11%
+
+Matriz de Confusão:
+958.0  1103.0  884.0  894.0  893.0  691.0  888.0  922.0  828.0  867.0  
+22.0   32.0    152.0  116.0  89.0   209.0  70.0   109.0  146.0   0.0  
