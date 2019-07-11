@@ -17,7 +17,7 @@ No arquivo **rmsprop.py** está a implementação propriamente dita do algoritmo
 
 ## resposta.txt
 
-O arquivo **resposta.txt** mostra o tempo que durou o treinamento da rede neural, sua porcentagem de acerto em relação ao conjunto de testes pre-estabelecido e também a matriz de confusão.
+O arquivo **resposta.txt** mostra o tempo que durou o treinamento da rede neural, sua porcentagem de acerto em relação ao conjunto de testes, treinamento e validação e também a matriz de confusão.
 
 A matriz de confusão está escrita no seguinte formato:
 

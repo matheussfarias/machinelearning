@@ -8,6 +8,9 @@ from sklearn.model_selection import train_test_split
 import time
 import random
 import funcoes
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import accuracy_score
+from sklearn.neural_network import MLPClassifier
 
 
 
@@ -86,18 +89,17 @@ Configurando hiperparâmetros:
             A segunda camada possui 10 neurônios
         
         Taxa de aprendizagem:
-            Após validação utilizando 10-Folds, a taxa de aprendizagem 1e-4
-            mostrou-se boa.
+            alpha = 5e-4
             
         Épocas: 10
-        Gradiente estocástico (batch=0)
+        Gradiente descendente estocástico (batch=0)
 """
 w1 = np.random.randn(784,15)*0.01
 b1 = np.zeros((15,1))
 w2 = np.random.randn(15,10)*0.01
 b2 = np.zeros((10,1))
 
-learning_rate = 1e-4
+learning_rate = 5e-4
 
 e1 = np.matrix(np.zeros((784,15)))
 e2 = np.matrix(np.zeros((15,10)))
@@ -225,16 +227,59 @@ for i in range (np.shape(x_test)[1]):
         if np.array_equal(np.matrix([0,0,0,0,0,0,0,0,0,1]),y_test[:,i]):
             mcf[1][9]+=1
 
-# Porcentagem de acerto
+
+# Porcentagem de acerto no teste
 porcentagem = (acerto/np.shape(x_test)[1])*100
+
 
 # Tempo de treinamento em segundos
 tempo = end-start
 
+X_train = np.transpose(X_train)
+X_validation = np.transpose(X_validation)
+y_train = np.transpose(y_train)
+y_validation = np.transpose(y_validation)
+x_test = np.transpose(x_test)
+y_test = np.transpose(y_test)
+
+# Criação da rede neural e configuração dos hiperparâmetros para uso no scikit
+clf = MLPClassifier(solver='lbfgs', activation='logistic', alpha=5e-4, hidden_layer_sizes=(15), random_state=1)
+
+# Cross Validation no scikit
+resultados = cross_val_predict(clf, X_validation, y_validation, cv=10)
+cros_valid_resultado = accuracy_score(np.array(y_validation),resultados) * 100
+
+X_train = np.transpose(X_train)
+X_validation = np.transpose(X_validation)
+y_train = np.transpose(y_train)
+y_validation = np.transpose(y_validation)
+x_test = np.transpose(x_test)
+y_test = np.transpose(y_test)
+
+acerto1=0
+# Contagem de acertos no treino
+for i in range (np.shape(X_train)[1]):
+    
+    # Forward Propagation
+    z1= w1.T*X_train[:,i] + b1
+    a1 = funcoes.relu(z1,0)
+    z2 = (w2.T*a1) + b2
+    a2 = funcoes.sigmoide(z2,0)
+    
+    # Tratamento da saída
+    fim = funcoes.resultado(a2)
+    
+    # Conta acerto
+    if np.array_equal(fim,y_train[:,i]):
+        acerto1+=1
+
+porcentagemtreino = (acerto1/np.shape(X_train)[1])*100
 # Criando e escrevendo em arquivos de texto
 arquivo = open('resposta.txt','w')
 arquivo.write("O tempo de treinamento total foi {0:.2f} segundos\n\n".format(tempo))
 arquivo.write("A porcentagem de acertos em relação ao conjunto de teste foi {0:.2f}%\n\n".format(porcentagem))
+arquivo.write("A porcentagem de acertos em relação ao conjunto de treino foi {0:.2f}%\n\n".format(porcentagemtreino))
+arquivo.write("A porcentagem de acertos em relação ao conjunto de validação Cross-Validation 10 Folds foi {0:.2f}%\n\n".format(cros_valid_resultado))
 arquivo.write("Matriz de Confusão:\n")
 arquivo.write("{}  {}  {}  {}  {}  {}  {}  {}  {}  {}  \n".format(mcf[0][0],mcf[0][1],mcf[0][2],mcf[0][3],mcf[0][4],mcf[0][5],mcf[0][6],mcf[0][7],mcf[0][8],mcf[0][9],))
 arquivo.write("{}   {}    {}  {}  {}   {}  {}   {}  {}   {}  \n".format(mcf[1][0],mcf[1][1],mcf[1][2],mcf[1][3],mcf[1][4],mcf[1][5],mcf[1][6],mcf[1][7],mcf[1][8],mcf[1][9],))
