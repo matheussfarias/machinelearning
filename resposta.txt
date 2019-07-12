@@ -1,11 +1,11 @@
-O tempo de treinamento total foi 524.89 segundos
+O tempo de treinamento total foi 402.89 segundos
 
-A porcentagem de acertos em relação ao conjunto de teste foi 91.20%
+A porcentagem de acertos em relação ao conjunto de teste foi 90.99%
 
-A porcentagem de acertos em relação ao conjunto de treino foi 90.84%
+A porcentagem de acertos em relação ao conjunto de treino foi 90.62%
 
 A porcentagem de acertos em relação ao conjunto de validação Cross-Validation 10 Folds foi 82.61%
 
 Matriz de Confusão:
-963.0  1102.0  915.0  912.0  907.0  758.0  912.0  935.0  853.0  880.0  
-17.0   33.0    121.0  98.0  75.0   142.0  46.0   96.0  121.0   0.0  
+962.0  1101.0  905.0  913.0  912.0  747.0  901.0  935.0  871.0  869.0  
+18.0   34.0    131.0  97.0  70.0   153.0  57.0   96.0  103.0   0.0  
