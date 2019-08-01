@@ -125,7 +125,7 @@ y_test = np.matrix(y_test[:,:])
 start = time.time()
 
 # Treino
-for j in range(0,10):
+for j in range(0,20):
     for i in lista:
         
         # Forward Propagation
